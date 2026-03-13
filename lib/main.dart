@@ -22,7 +22,11 @@ void main() async {
     ),
   );
 
-  await dotenv.load(fileName: ".env");
+  try {
+    await dotenv.load(fileName: '.env');
+  } catch (_) {
+    // Optional in production (for example, Vercel deploys using --dart-define).
+  }
 
   try {
     GeminiService.initialize();

@@ -9,11 +9,16 @@ class GeminiService {
   static const String _model = 'gemini-2.0-flash';
   static const String _baseUrl =
       'https://generativelanguage.googleapis.com/v1beta/models';
+  static const String _apiKeyFromDefine =
+      String.fromEnvironment('GEMINI_API_KEY');
 
   static void initialize() {
-    final apiKey = dotenv.env['GEMINI_API_KEY'] ?? '';
+    final apiKey = _apiKeyFromDefine.isNotEmpty
+        ? _apiKeyFromDefine
+        : (dotenv.env['GEMINI_API_KEY'] ?? '');
     if (apiKey.isEmpty || apiKey == 'YOUR_GEMINI_API_KEY_HERE') {
-      throw Exception('Please set your GEMINI_API_KEY in the .env file');
+      throw Exception(
+          'Please set GEMINI_API_KEY via --dart-define or in a local .env file');
     }
     _apiKey = apiKey;
   }
