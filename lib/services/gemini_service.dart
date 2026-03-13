@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 import '../models/analysis_result.dart';
 
@@ -13,14 +12,10 @@ class GeminiService {
       String.fromEnvironment('GEMINI_API_KEY');
 
   static void initialize() {
-    final apiKey = _apiKeyFromDefine.isNotEmpty
-        ? _apiKeyFromDefine
-        : (dotenv.env['GEMINI_API_KEY'] ?? '');
-    if (apiKey.isEmpty || apiKey == 'YOUR_GEMINI_API_KEY_HERE') {
-      throw Exception(
-          'Please set GEMINI_API_KEY via --dart-define or in a local .env file');
+    if (_apiKeyFromDefine.isEmpty) {
+      throw Exception('GEMINI_API_KEY not set. Build with --dart-define=GEMINI_API_KEY=your_key');
     }
-    _apiKey = apiKey;
+    _apiKey = _apiKeyFromDefine;
   }
 
   static const String _analysisPrompt = '''

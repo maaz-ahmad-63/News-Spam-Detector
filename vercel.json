@@ -1,5 +1,5 @@
 {
-  "buildCommand": "./flutter/bin/flutter pub get && ./flutter/bin/flutter build web --release --base-href / --dart-define=GEMINI_API_KEY=$GEMINI_API_KEY",
+  "buildCommand": "./flutter/bin/flutter pub get && ./flutter/bin/flutter build web --release --no-wasm-dry-run --base-href / --dart-define=GEMINI_API_KEY=$GEMINI_API_KEY",
   "installCommand": "git clone https://github.com/flutter/flutter.git --depth 1 -b stable",
   "outputDirectory": "build/web",
   "framework": null,
