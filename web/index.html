@@ -31,6 +31,12 @@
 
   <title>News Verifier</title>
   <link rel="manifest" href="manifest.json">
+  <script>
+    // Force HTML renderer to avoid CanvasKit download issues on Vercel
+    window.flutterConfiguration = {
+      canvasKitBaseUrl: "canvaskit/"
+    };
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
